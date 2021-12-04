@@ -2,13 +2,13 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 public class Main {
 
     final static char[] vov = {'a', 'e', 'i', 'o', 'u', 'y'};
-    final static char[] con = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'};
 
     final static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
@@ -22,6 +22,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         out.println("Введите размер матрицы их диапазона от 2 до 5 включительно:");
         M = testNum();
+//        M = sc.nextLine();
+
         while (M > 5 || M < 2) {
             out.println("Число выходит за пределы диапазона (от 2 до 5 включительно)");
             M = testNum();
@@ -41,16 +43,12 @@ public class Main {
     }
 
     public static int testNum() {
-        boolean b = true;
-        while (b) {
-            try {
-                Scanner sc = new Scanner(System.in);
-                return sc.nextInt();
-            } catch (Exception e) {
-                out.println("Ошибка. Введите, пожалуйста, число.");
-            }
+        Scanner sc = new Scanner(System.in);
+        while (!sc.hasNextInt()) {
+            out.println("Вы ввели не число");
+            sc = new Scanner(System.in);
         }
-        return -99;
+        return sc.nextInt();
     }
 
     public static String[][] matrixInit(int M) {
@@ -66,38 +64,18 @@ public class Main {
         String[][] matrix = new String[M][M];
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
+        out.println("Элемент должен состоять из пяти английских букв.");
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < M; j++) {
                 if (v == 1) {
-                    boolean b = true;
-                    while (b) {
-                        out.println("Инициализируйте элемент " + i + " строки и " + j + " столбца");
-                        out.println("Элемент должен состоять из пяти английских букв:");
+                    //Упрощённая реализация
+                    out.println("Инициализируйте элемент " + i + " строки и " + j + " столбца");
+                    matrix[i][j] = sc.nextLine();
+                    while (!matrix[i][j].matches("^[a-zA-Z0-9]+$")) {
+                        sc = new Scanner(System.in);
+                        out.println("Введён неверный формат элемента матрицы");
+                        out.println("Элемент матрицы должен состоять из пяти английских букв:");
                         matrix[i][j] = sc.nextLine();
-                        char[] ch = matrix[i][j].toLowerCase().toCharArray();
-                        int count = 0;
-                        for (char item : ch) {
-                            //Проверка гласных
-                            for (char v_i : vov) {
-                                if (item == v_i) {
-                                    count++;
-                                    break;
-                                }
-                            }
-                            //Проверка согласных
-                            for (char c_i : con) {
-                                if (item == c_i) {
-                                    count++;
-                                    break;
-                                }
-                            }
-                        }
-                        if (count == ch.length && ch.length == 5) {
-                            b = false;
-                        } else {
-                            out.println("Неккоректный элемент матрицы");
-                        }
-                        ;
                     }
                 } else {
                     //Симуляция автоматического заполнения
@@ -127,11 +105,7 @@ public class Main {
                         }
                     }
                     //Подсчёт согласных
-                    for (char c_i : con) {
-                        if (item == c_i) {
-                            con_count++;
-                        }
-                    }
+                    con_count = el.length - vov_count;
                 }
                 //Замена элемента матрицы
                 matrix[i][j] = String.valueOf(vov_count) + String.valueOf(con_count);
