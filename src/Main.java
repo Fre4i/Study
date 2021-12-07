@@ -9,8 +9,6 @@ import static java.lang.System.out;
 
 public class Main {
 
-    final static char[] vov = {'a', 'e', 'i', 'o', 'u', 'y'};
-    final static char[] vov_CAPS = {'A', 'E', 'I', 'O', 'U', 'Y'};
 
     final static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
@@ -53,6 +51,7 @@ public class Main {
         matrixPrint(matrix);
     }
 
+    //Выполнено
     public static String[][] matrixInit(int M) {
         out.println("Введите \"1\", чтобы ввести данные матрицы вручную");
         out.println("Введите \"0\", чтобы данные матрицы заполнились автоматически");
@@ -84,7 +83,6 @@ public class Main {
                     //Упрощённая реализация
                     out.println("Инициализируйте элемент " + i + " строки и " + j + " столбца");
                     matrix[i][j] = sc.nextLine();
-
                     while (true) {
                         if (matrix[i][j].length() == 5) {
                             if (matchSym(matrix[i][j])) {
@@ -101,10 +99,12 @@ public class Main {
                         }
                     }
                 } else {
+                    char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
                     //Симуляция автоматического заполнения
                     StringBuilder word = new StringBuilder();
                     for (int ch_int = 0; ch_int < 5; ch_int++) {
-                        word.append(alphabet[abs1(random.nextInt() % alphabet.length)]);
+                        word.append(alphabet[abs(random.nextInt() % alphabet.length)]);
                     }
                     matrix[i][j] =  String.valueOf(word);
                 }
@@ -115,6 +115,8 @@ public class Main {
 
     //Выполнено
     public static void matrixCalc(String[][] matrix) {
+        char[] vov = {'a', 'e', 'i', 'o', 'u', 'y'};
+        char[] vov_CAPS = {'A', 'E', 'I', 'O', 'U', 'Y'};
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 //Обработка элемента
@@ -138,6 +140,7 @@ public class Main {
     }
 
     //Выполнено
+    //Осталось
     public static void matrixPrint(String[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             out.print("| ");

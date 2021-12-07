@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f98001f-5875-4b28-9e3d-5a3bec942a36" name="Changes" comment="abs method">
+    <list default="true" id="1f98001f-5875-4b28-9e3d-5a3bec942a36" name="Changes" comment="11 practic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -101,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638865061650</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="11 practic">
+      <created>1638878749584</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1638878749584</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,6 +126,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="practic number 12" />
     <MESSAGE value="abs method" />
-    <option name="LAST_COMMIT_MESSAGE" value="abs method" />
+    <MESSAGE value="11 practic" />
+    <option name="LAST_COMMIT_MESSAGE" value="11 practic" />
   </component>
 </project>
