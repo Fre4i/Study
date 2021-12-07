@@ -9,6 +9,7 @@ import static java.lang.System.out;
 public class Main {
 
     final static char[] vov = {'a', 'e', 'i', 'o', 'u', 'y'};
+    final static char[] vov_CAPS = {'A', 'E', 'I', 'O', 'U', 'Y'};
 
     final static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
@@ -29,17 +30,17 @@ public class Main {
             M = testNum();
         }
         //Объявление квадратной матрицы
-        String[][] m = new String[M][M];
+        String[][] matrix;
         //Заполнение матрицы
-        m = matrixInit(M);
+        matrix = matrixInit(M);
         //Вывод получившейся матрицы
         out.println("\nВаша матрица:");
-        matrixPrint(m);
+        matrixPrint(matrix);
         //Обработка матрицы
-        matrixCalc(m);
+        matrixCalc(matrix);
         //Вывод обработанной матрицы
         out.println("\nОбработанная матрица:");
-        matrixPrint(m);
+        matrixPrint(matrix);
     }
 
     public static int testNum() {
@@ -48,6 +49,7 @@ public class Main {
             out.println("Вы ввели не число");
             sc = new Scanner(System.in);
         }
+        //TODO переделать метод на основе таблицы символов
         return sc.nextInt();
     }
 
@@ -71,7 +73,7 @@ public class Main {
                     //Упрощённая реализация
                     out.println("Инициализируйте элемент " + i + " строки и " + j + " столбца");
                     matrix[i][j] = sc.nextLine();
-                    while (!matrix[i][j].matches("^[a-zA-Z0-9]+$")) {
+                    while (!matrix[i][j].matches("^[a-zA-Z]+$") && matrix[i][j].length() != 5) {
                         sc = new Scanner(System.in);
                         out.println("Введён неверный формат элемента матрицы");
                         out.println("Элемент матрицы должен состоять из пяти английских букв:");
@@ -81,7 +83,8 @@ public class Main {
                     //Симуляция автоматического заполнения
                     StringBuilder word = new StringBuilder();
                     for (int ch_int = 0; ch_int < 5; ch_int++) {
-                        word.append(alphabet[abs(random.nextInt() % alphabet.length)]);
+                        word.append(alphabet[abs1(random.nextInt() % alphabet.length)]);
+                        //TODO переопределить метод @nextInt
                     }
                     matrix[i][j] =  String.valueOf(word);
                 }
@@ -97,10 +100,10 @@ public class Main {
                 int vov_count = 0; //счётчик гласных
                 int con_count = 0; //счётчик согласных
                 char[] el = matrix[i][j].toLowerCase().toCharArray();
-                for (char item : el) {
+                for (int item = 0; item < el.length ; ++item) {
                     //Подсчёт гласных
-                    for (char v_i : vov) {
-                        if (item == v_i) {
+                    for (int v_i = 0 ; v_i < vov.length; ++v_i) {
+                        if (el[item] == vov[v_i] || el[item] == vov_CAPS[v_i]) {
                             vov_count++;
                         }
                     }
@@ -108,7 +111,7 @@ public class Main {
                     con_count = el.length - vov_count;
                 }
                 //Замена элемента матрицы
-                matrix[i][j] = String.valueOf(vov_count) + String.valueOf(con_count);
+                matrix[i][j] = "" + vov_count + con_count;
             }
         }
     }
@@ -122,4 +125,13 @@ public class Main {
             out.print("|\n");
         }
     }
+
+    public int randomInt() {
+
+    }
+
+    public static int abs1(int a) {
+        return (a < 0) ? -a : a;
+    }
+
 }
